@@ -1,0 +1,210 @@
+/* styles.css */
+
+/* 通用样式 */
+body {
+    font-family: Arial, sans-serif; /* 设置全局字体 */
+    line-height: 1.6; /* 行高 */
+    margin: 0; /* 去掉默认外边距 */
+    padding: 0; /* 去掉默认内边距 */
+    background-color: dimgray; /* 页面背景色 */
+}
+
+h1, h2, h3 {
+    color: black; /* 主要标题颜色 */
+}
+
+a {
+    text-decoration: none; /* 去掉链接下划线 */
+    color: #007bff; /* 链接颜色 */
+}
+
+a:hover {
+    text-decoration: underline; /* 鼠标悬停时添加下划线 */
+}
+
+/* 页眉样式 */
+header {
+    background: transparent; /* 页眉背景色 */
+    color: #fff; /* 页眉文本颜色 */
+    padding: 10px 0; /* 上下内边距 */
+    text-align: center; /* 内容居中对齐 */
+}
+
+nav ul {
+    list-style: none; /* 去掉默认列表样式 */
+    padding: 0; /* 去掉默认内边距 */
+}
+
+nav ul li {
+    display: inline; /* 水平显示列表项 */
+    margin: 0 15px; /* 列表项之间的间距 */
+
+}
+
+nav ul li a {
+    background-color: rgba(255, 255, 255, 0.5); /* 文章项目的背景色，稍微透明 */
+    border-radius: 8px; /* 圆角边框 */
+    padding: 10px; /* 内边距 */
+    margin: 10px 0; /* 外边距 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    width: 600px;
+    color: indianred;
+}
+
+nav ul li a:hover {
+    background-color: gray; /* 悬停时的背景色 */
+    color: pink; /* 悬停时的文本颜色 */
+    font-weight: 600;
+}
+/* 容器样式 */
+.container, .article-list, .registration-form, main {
+    max-width: 500px; /* 最大宽度 */
+    margin: 10px 50px; /* 上下外边距，水平居中 */
+    padding: 20px; /* 内边距 */
+    background-color: transparent;/* 背景色 */
+    border-radius: 8px; /* 边角圆滑处理 */
+    border: none;
+}
+
+/* 表单样式 */
+.form {
+    display: flex; /* 使用 flexbox 布局 */
+    flex-direction: column; /* 垂直排列子元素 */
+}
+
+.form-group {
+    margin-bottom: 10px; /* 每个表单组底部间距 */
+}
+
+.form-group label {
+    display: block; /* 标签独占一行 */
+    margin-bottom: 5px; /* 标签与输入框之间的间距 */
+}
+
+input[type="text"], input[type="email"], input[type="password"]{
+    background-color: rgba(255, 255, 255, 0.5); /* 文章项目的背景色，稍微透明 */
+    border-radius: 8px; /* 圆角边框 */
+    padding: 10px; /* 内边距 */
+    margin: 10px 0; /* 外边距 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    width: 600px;
+}
+
+textarea{
+    background-color: rgba(255, 255, 255, 0.5); /* 文章项目的背景色，稍微透明 */
+    border-radius: 8px; /* 圆角边框 */
+    padding: 10px; /* 内边距 */
+    margin: 10px 0; /* 外边距 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    width: 600px;
+}
+
+button {
+    color: black;
+    padding: 10px 15px;
+    border-radius: 4px;
+    width: 60px;
+    cursor: pointer; /* 鼠标指针变为手形 */
+}
+
+button:hover {
+    background-color: gray; /* 鼠标悬停时按钮背景色变化 */
+}
+
+.btn {
+    background-color: rgba(250, 256, 256, 0.5); /* 按钮背景色 */
+    color: black; /* 按钮文本颜色 */
+    padding: 10px 20px; /* 内边距 */
+    border: none; /* 去掉边框 */
+    border-radius: 4px; /* 边角圆滑处理 */
+    cursor: pointer; /* 鼠标指针变为手形 */
+    width: 60px; /* 设置按钮的固定宽度 */
+}
+
+.btn:hover{
+    background-color: rgba(256, 254, 220, 0.8); /* 悬停时的背景色 */
+    color: black; /* 悬停时的文本颜色 */
+}
+/* 列表样式 */
+.post-list {
+    list-style: none; /* 去掉默认列表样式 */
+    padding: 0; /* 去掉默认内边距 */
+}
+
+.post-item {
+    background-color: rgba(255, 255, 255, 0.5); /* 文章项目的背景色，稍微透明 */
+    border-radius: 8px; /* 圆角边框 */
+    padding: 10px; /* 内边距 */
+    margin: 10px 0; /* 外边距 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
+    width: 600px;
+}
+
+.post-item h3 {
+    color: #333; /* 标题颜色 */
+    font-size: 1.5em; /* 标题字体大小 */
+}
+
+.post-item p {
+    color: #555; /* 内容颜色 */
+    line-height: 1.6; /* 行间距 */
+}
+
+
+
+/* 闪烁消息样式 */
+.flash-messages {
+    list-style: none; /* 去掉默认列表样式 */
+    padding: 0; /* 去掉默认内边距 */
+    background-color: black; /* 背景色 */
+    color: #721c24; /* 文字颜色 */
+    padding: 10px; /* 内边距 */
+    border-radius: 4px; /* 边角圆滑处理 */
+    margin: 20px 0; /* 上下外边距 */
+}
+
+/* 页脚样式 */
+/* 页脚样式 */
+footer {
+    text-align: center; /* 内容居中对齐 */
+    padding: 1px 0; /* 上下内边距 */
+    background: transparent; /* 透明背景 */
+    color: #555; /* 文本颜色，淡灰色 */
+    position: relative; /* 相对定位 */
+    bottom: 0; /* 使页脚在底部 */
+    width: 100%; /* 宽度 100% */
+}
+
+/* 背景图像样式 */
+.background-image {
+    position: fixed; /* 固定定位 */
+    top: 0; /* 顶部对齐 */
+    left: 0; /* 左侧对齐 */
+    width: 100%; /* 宽度为100% */
+    height: 100%; /* 高度为100% */
+    object-fit: cover; /* 保持图像比例并覆盖整个容器 */
+    opacity: 0.5; /* 设置透明度 */
+    z-index: -1; /* 将图像放在内容的后面 */
+}
+
+.actions { /* 新增一个类名用于包裹这两个元素 */
+    display: flex; /* 使用 flexbox 布局 */
+    align-items: center; /* 垂直居中对齐 */
+    gap: 20px; /* 添加一些间隔，方便区分 */
+}
+
+.img-style {
+    display: block;              /* 使图片块级显示 */
+    margin: 20px auto;           /* 居中显示，顶部和底部留空白 */
+    max-width: 100%;             /* 响应式，确保图片不会超过其父容器的宽度 */
+    height: auto;                /* 保持图片的宽高比 */
+    border-radius: 10px;         /* 图片圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 动画效果 */
+    width: 200px;
+}
+
+.img-style:hover {
+    transform: scale(1.05);      /* 鼠标悬停时放大图片 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
+}
