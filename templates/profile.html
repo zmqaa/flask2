@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}个人中心{% endblock %}
+
+{% block content %}
+    <header>
+        <h1>个人中心</h1>
+    </header>
+    <div class="container">
+        <!-- 显示用户头像 -->
+
+        <!-- 表单：更改用户名和头像 -->
+        <form action="{{ url_for('profile') }}" method="POST" enctype="multipart/form-data">
+            <!-- 用户名输入框 -->
+            <div class="form-group">
+                <label for="username">用户名:</label>
+                <input type="text" name="username" id="username" value="{{ current_user.username }}" required>
+            </div>
+
+            <!-- 头像上传框 -->
+            <div class="form-group">
+                <label for="avatar">上传新头像:</label>
+                <input type="file" name="avatar" id="avatar" accept="image/*">
+            </div>
+
+            <!-- 提交按钮 -->
+            <div class="form-group">
+                <button type="submit">保存更改</button>
+            </div>
+        </form>
+
+        <!-- 显示反馈信息 -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 zmqaa</p>
+    </footer>
+{% endblock %}

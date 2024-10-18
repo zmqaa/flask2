@@ -3,6 +3,10 @@ from flask_login import LoginManager, login_user, login_required, current_user, 
 import click
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
+from datetime import datetime
+import os
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -15,11 +19,14 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+# 设置头像的上传目录
+UPLOAD_FOLDER = os.path.join('static', 'uploads')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 @login_manager.user_loader
 def load_user(user_id):
     user = User.query.get(int(user_id))
     return user
-
 
 
 @click.command()
@@ -45,7 +52,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(20), unique=True, nullable=False) #唯一，不可为空
     password_hash = db.Column(db.String(128), nullable=False)
     email = db.Column(db.String(123), unique=True, nullable=False)
-    avatar = db.Column(db.String(200))  #头像的url
+    avatar = db.Column(db.String(200), default='1.jpg')  #头像的url
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -66,6 +73,19 @@ class Post(db.Model):
 
     def __repr__(self):
         return f'<文章> {self.title}'
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
+    create_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    author_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('post.id'), nullable=False)
+    author = db.relationship('User', backref=db.backref('comments', lazy='dynamic'))
+    post = db.relationship('Post', backref=db.backref('comments', lazy='dynamic'))
+
+    def __repr__(self):
+        return f'<评论 {self.id}>'
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     posts = Post.query.all()
@@ -162,6 +182,66 @@ def edit(post_id):
         return redirect(url_for('index'))
 
     return render_template('edit.html', post=post)
+
+@app.route('/post/<int:post_id>', methods=['GET', 'POST'])
+@login_required
+def post_detail(post_id):
+    post = Post.query.get_or_404(post_id)
+    if request.method == 'POST':
+        content = request.form.get('content')
+        if content:
+            comment = Comment(content=content, author=current_user, post=post)
+            db.session.add(comment)
+            db.session.commit()
+            flash('评论已添加')
+        return redirect(url_for('post_detail', post_id=post_id))
+    return render_template('post_detail.html', post=post)
+
+@app.route('/comment/delete/<int:comment_id>', methods=['POST'])
+@login_required
+def delete_comment(comment_id):
+    comment = Comment.query.get_or_404(comment_id)
+    if comment.author != current_user and comment.post.author != current_user:
+        flash('您没有权限删除此评论')
+        return redirect(url_for('post_detail', post_id=comment.post_id))
+    db.session.delete(comment)
+    db.session.commit()
+    flash('评论已删除')
+    return redirect(url_for('post_detail', post_id=comment.post_id))
+
+#允许的文件名
+Allowed_file = {'png', 'jpg', 'jpeg', 'gif'}
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in Allowed_file
+
+
+
+@app.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    if request.method == 'POST':
+        # 更新用户名
+        username = request.form.get('username')
+        if username:
+            current_user.username = username
+
+        # 处理头像上传
+        avatar = request.files.get('avatar')
+        # 处理头像上传
+        if avatar and allowed_file(avatar.filename):
+            filename = secure_filename(avatar.filename)
+            avatar_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+            avatar.save(avatar_path)
+            current_user.avatar = f'uploads/{filename}'  # 只保存相对路径
+
+        # 保存到数据库
+        db.session.commit()
+        flash('个人信息已更新')
+        return redirect(url_for('profile'))
+
+    return render_template('profile.html')
+
+
 
 
 if __name__ == '__main__':

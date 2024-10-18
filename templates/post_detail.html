@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ post.title }}</h1>
+<p>作者: {{ post.author.username }} | {{ post.create_time }}</p>
+<div class="post-item" style="color: darkslategray">{{ post.content }}</div>
+
+<h2>评论</h2>
+{% for comment in post.comments %}
+<div class="comment-item">
+    <p style="color: cornflowerblue; font-size: 20px;">{{ comment.author.username }} 说:</p>
+    <p style="color: black">{{ comment.content }}</p>
+    <small style="background-color: rgba(0, 0, 0, 0.05) ;">发布时间: {{ comment.create_time }}</small>
+    {% if current_user == comment.author or current_user == post.author %}
+    <form action="{{ url_for('delete_comment', comment_id=comment.id) }}" method="post">
+        <input type="submit" value="删除" class="commentsub">
+    </form>
+    {% endif %}
+</div>
+{% endfor %}
+
+<h3>评论</h3>
+<form action="{{ url_for('post_detail', post_id=post.id) }}" method="post">
+    <textarea name="content" required></textarea>
+    <input type="submit" value="发布" class="commentsub">
+</form>
+{% endblock %}

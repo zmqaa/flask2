@@ -4,7 +4,6 @@
 
 {% block content %}
     <div class="article-list">
-        <h2>文章列表</h2>
 
         {% if current_user.is_authenticated %}
             <p class="welcome-message">欢迎, <strong>{{ current_user.username }}</strong>!</p>
@@ -18,9 +17,9 @@
         <ul class="post-list">
             {% for post in posts %}
                 <li class="post-item">
-                    <h3>{{ post.title }}</h3>
-                    <p>{{ post.content }}</p>
-                    <small>作者: {{ post.author.username }} | 发布于: {{ post.create_time }}</small>
+                    <h3><a style="color: black" href="{{ url_for('post_detail', post_id=post.id) }}">{{ post.title }}</a></h3>
+                    <p style="color: darkslategrey">{{ post.content }}</p>
+                    <small style="background-color: rgba(250, 250, 250, 0.1)">作者: {{ post.author.username }} | 发布于: {{ post.create_time }}</small>
 
                     {% if current_user.is_authenticated and current_user.id == post.author_id %}
                         <div class="actions">

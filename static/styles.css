@@ -33,6 +33,7 @@ header {
 nav ul {
     list-style: none; /* 去掉默认列表样式 */
     padding: 0; /* 去掉默认内边距 */
+    margin: 0;
 }
 
 nav ul li {
@@ -125,6 +126,27 @@ button:hover {
     background-color: rgba(256, 254, 220, 0.8); /* 悬停时的背景色 */
     color: black; /* 悬停时的文本颜色 */
 }
+
+.commentsub {
+    background:antiquewhite ;
+    cursor: pointer; /* 鼠标指针变为手形 */
+    border-radius: 4px; /* 边角圆滑处理 */
+    font-weight: 400;
+}
+.commentsub:hover{
+    background-color: rgba(256, 254, 220, 0.8); /* 悬停时的背景色 */
+    color: black; /* 悬停时的文本颜色 */
+}
+
+.comment-item {
+    background-color: rgba(250, 250, 250, 0.5); /* 文章项目的背景色，稍微透明 */
+    border-radius: 8px; /* 圆角边框 */
+    padding: 10px; /* 内边距 */
+    margin: 10px 0; /* 外边距 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* 添加阴影效果 */
+    width: 600px;
+    font-weight: 600;
+}
 /* 列表样式 */
 .post-list {
     list-style: none; /* 去掉默认列表样式 */
@@ -138,6 +160,7 @@ button:hover {
     margin: 10px 0; /* 外边距 */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 添加阴影效果 */
     width: 600px;
+    font-weight: 600;
 }
 
 .post-item h3 {
@@ -207,4 +230,59 @@ footer {
 .img-style:hover {
     transform: scale(1.05);      /* 鼠标悬停时放大图片 */
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* 增强阴影效果 */
+}
+
+.fon {
+    color: black;
+}
+
+.avatar-style {
+    display: block;              /* 使图片块级显示 */
+    margin: auto ;           /* 居中显示，顶部和底部留空白 */
+    max-width: 100%;             /* 响应式，确保图片不会超过其父容器的宽度 */
+    height: auto;                /* 保持图片的宽高比 */
+    border-radius: 50%;         /* 图片圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 动画效果 */
+    width: 150px;
+}
+
+.avatar-style:hover {
+    transform: scale(1.05);      /* 鼠标悬停时放大图片 */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); /* 增强阴影效果 */
+}
+
+.proj {
+    display: block;              /* 使图片块级显示 */
+    margin: 0px;
+    max-width: 100%;             /* 响应式，确保图片不会超过其父容器的宽度 */
+    height: auto;                /* 保持图片的宽高比 */
+    border-radius: 10px;         /* 图片圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 阴影效果 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 动画效果 */
+    width: 100px;
+}
+
+.user-info {
+    display: flex; /* 使用 Flexbox 布局 */
+    align-items: center; /* 垂直居中对齐 */
+}
+
+.user-info p {
+    margin: 0; /* 去掉段落的默认边距 */
+    color: black;
+}
+
+.logo {
+    flex: 0 1 auto; /* 自适应宽度 */
+}
+
+header a {
+    display: inline-block;
+}
+
+.posi {
+    position: absolute; /* 绝对定位 */
+    top: 10px; /* 距离顶部的距离 */
+    left: 10px; /* 距离左侧的距离 */
 }
