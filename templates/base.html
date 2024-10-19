@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}动漫主页{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    <img src="{{ url_for('static', filename='7.jpg') }}" alt="背景", class="background-image">
 </head>
 <body>
+    <img src="{{ url_for('static', filename='7.jpg') }}" alt="背景", class="background-image">
     <header>
         <a href="{{ url_for('index') }}" class="posi">
             <img class="proj" src="{{ url_for('static', filename='2.jpg') }}" alt="主页">

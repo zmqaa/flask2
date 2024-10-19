@@ -58,13 +58,29 @@ nav ul li a:hover {
     font-weight: 600;
 }
 /* 容器样式 */
-.container, .article-list, .registration-form, main {
-    max-width: 500px; /* 最大宽度 */
-    margin: 10px 50px; /* 上下外边距，水平居中 */
+.article-list, .registration-form, main {
+    width: 100%; /* 宽度自适应 */
+    max-width: 100%; /* 默认最大宽度为100% */
+    margin: 10px auto; /* 上下外边距，水平居中，避免左右溢出 */
     padding: 20px; /* 内边距 */
-    background-color: transparent;/* 背景色 */
-    border-radius: 8px; /* 边角圆滑处理 */
+    background-color: transparent;
+    border-radius: 8px;
     border: none;
+    display: flex; /* 使用 Flexbox 布局 */
+    flex-direction: column; /* 让元素垂直排列 */
+
+}
+
+.container {
+    width: 100%; /* 宽度自适应 */
+    max-width: 100%; /* 默认最大宽度为100% */
+    margin: 10px auto; /* 上下外边距，水平居中，避免左右溢出 */
+    padding: 20px; /* 内边距 */
+    background-color: transparent;
+    border-radius: 8px;
+    border: none;
+    display: flex; /* 使用 Flexbox 布局 */
+    flex-direction: column; /* 让元素垂直排列 */
 }
 
 /* 表单样式 */
@@ -286,3 +302,4 @@ header a {
     top: 10px; /* 距离顶部的距离 */
     left: 10px; /* 距离左侧的距离 */
 }
+
